@@ -19,18 +19,33 @@ const handleCard = async (categoryId) => {
     // console.log(categoryId)
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const data = await res.json()
-    console.log(data.data)
-
+    console.log(data.data.length)
     
     const cardContainer = document.getElementById('card-container')
     cardContainer.innerHTML = ""
+
+    if(data.data.length === 0){
+        const emptyContainer = document.getElementById('empty-container')
+        const div = document.createElement('div')
+        
+        div.innerHTML = `
+            <div class=" flex justify-center">
+                <div>
+                    <img src="./icons/icon.png">
+                    <p>Oops!! Sorry, There is no content here</p>
+                </div>
+            </div>
+        `
+        emptyContainer.appendChild(div)
+    }
+
     data.data.forEach((element) => {
         // console.log(element.authors[0].profile_name)
         const div = document.createElement('div')
         div.innerHTML = `
                 <div class="card rounded-lg bg-base-100 ">
                     <figure><img class="rounded-lg w-72 h-44" src="${element.thumbnail}" alt="" /></figure>
-                    <div class="my-5">
+                    <div class="my-5 mx-2">
                         <div class="flex gap-2">
                             <div>
                                 <img class="w-10 h-10 rounded-full" src="${element.authors[0].profile_picture}">
