@@ -8,15 +8,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <section class="container mx-auto mt-10">
+    <section class="max-w-5xl mx-auto mt-10">
+        <h1 class="text-center text-2xl font-bold mb-5">Here is answer of some js questions</h1>
         <ul>
             <li class="list-disc">
                 <h4 class="text-xl font-medium">Discuss the scope of var, let, and const.</h4>
-                <p>Ans:</p>
+                <p><span class="text-xl font-semibold text-red-600">Ans:</span> Scope means where variables are available for use. Lets discuss about the scope of var, ler and const.<br>
+                    <span class="font-semibold">var scope:</span> var scope is global scop. Global scop means var can declared outside a function. Var is also function scoped when it declared within a finction. We can redeclare var variables and update variables. var variables are hoisted to the top of their scop.
+                    <br><span class="font-semibold">let scope:</span> let variable is block scoped. Block scope is inside of second brackets '{}'. That meana let variables only available inside of block. We can not redeclare let but let can be updated.
+                    <br><span class="font-semibold">const scope:</span> const variable is also block scoped. But const cannot be updated or re-declared.
+                </p>
             </li>
-            <li class="list-disc my-5">
+            <li class="list-disc my-7">
                 <h4 class="text-xl font-medium">Tell us the use cases of null and undefined.</h4>
-                <p>Ans:</p>
+                <p><span class="text-xl font-semibold text-red-600">Ans:</span> Here is the answer of the use case of null and undefined lets see:
+                    <br><span class="font-semibold">null:</span> 'null' in JavaScript means an empty value. If variable has been assigned as null contains no value. 'null' is an object in JavaScript. An object can be emptied by setting it to null. Type of 'null' is objedt.
+                    <br><span class="font-semibold">undefined:</span> 'undefined' means not defined. If we declared a variable but do not assign a value to is, the variable become undefined. Type of 'undefined' is undefined.
+                </p>
             </li>
             <li class="list-disc">
                 <h4 class="text-xl font-medium">What do you mean by REST API?</h4>

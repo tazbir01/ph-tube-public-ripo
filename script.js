@@ -12,6 +12,7 @@ const handleCategory = async () => {
             <button onclick="handleCard('${element.category_id}')" class="bg-slate-200 p-2 rounded font-semibold hover:bg-red-500 hover:text-white">${element.category}</button>
         `
         categoryContainer.appendChild(div)
+        shorButton(element.category_id)
     });
 }
 
@@ -46,25 +47,16 @@ const handleCard = async (categoryId) => {
     else {
         data.data.forEach((element) => {
             // console.log(element.others.posted_date)
-
-
-            // console.log(`${hours} hours ${remainingMinutes}minutes`)
-
-            // if(element.others.posted_date < 0){
-            //     const date = document.querySelector('#date')
-            //     date.innerHTML=""
-            // }
-
             const showDate = () => {
                 const seconds = `${element.others.posted_date}`
                 const minutes = Math.floor(seconds / 60)
                 const hours = Math.floor(minutes / 60)
                 const remainingMinutes = minutes % 60
 
-                const date = `${hours} hrs ${remainingMinutes} min`
+                const date = `${hours} hrs ${remainingMinutes} min ago`
                 return date;
             }
-            showDate()
+            // showDate()
 
             const div = document.createElement('div')
             div.innerHTML = `
@@ -105,3 +97,13 @@ const blogButton = () => {
     window.location.href = "blog.html"
 }
 
+const shorButton=async(categoryId)=> {
+    // console.log(categoryId)
+    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
+    const data = await res.json()
+    console.log(data.data)
+
+    
+    data.data.sort((a,b)=> b.views - a.views)
+}
+shorButton()
