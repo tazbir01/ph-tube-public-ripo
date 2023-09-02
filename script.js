@@ -45,15 +45,26 @@ const handleCard = async (categoryId) => {
     }
     else {
         data.data.forEach((element) => {
-            console.log(element.others.posted_date)
+            // console.log(element.others.posted_date)
 
-            const seconds = `${element.others.posted_date}`
-            const minutes = Math.floor(seconds / 60)
-            const hours = Math.floor(minutes / 60)
-            const remainingMinutes = minutes % 60
-            console.log(remainingMinutes)
-            console.log(`${hours} hours ${remainingMinutes}minutes`)
-            
+
+            // console.log(`${hours} hours ${remainingMinutes}minutes`)
+
+            // if(element.others.posted_date < 0){
+            //     const date = document.querySelector('#date')
+            //     date.innerHTML=""
+            // }
+
+            const showDate = () => {
+                const seconds = `${element.others.posted_date}`
+                const minutes = Math.floor(seconds / 60)
+                const hours = Math.floor(minutes / 60)
+                const remainingMinutes = minutes % 60
+
+                const date = `${hours} hrs ${remainingMinutes} min`
+                return date;
+            }
+            showDate()
 
             const div = document.createElement('div')
             div.innerHTML = `
@@ -61,7 +72,7 @@ const handleCard = async (categoryId) => {
                         <figure class="relative">
                             <img class="rounded-lg w-72 h-44 z-0" src="${element.thumbnail}" alt="" />
                             <p id="date" class="bg-zinc-900 text-white rounded absolute right-6 bottom-3 z-10 px-2">
-                            ${hours} hrs ${remainingMinutes} min ago
+                                ${element.others.posted_date? showDate() : ""}
                             </p>
                         </figure>
                         <div class="my-5 mx-2">
