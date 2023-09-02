@@ -20,7 +20,7 @@ const handleCard = async (categoryId) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
     const data = await res.json()
     // console.log(data.data[0].others.views.sort())
-    
+
     const cardContainer = document.getElementById('card-container')
     cardContainer.innerHTML = ""
 
@@ -28,9 +28,9 @@ const handleCard = async (categoryId) => {
     emptyContainer.innerHTML = ""
 
 
-    if(data.data.length === 0){
+    if (data.data.length === 0) {
         const div = document.createElement('div')
-        
+
         div.innerHTML = `
             <div class="flex justify-center">
                 <div>
@@ -43,15 +43,26 @@ const handleCard = async (categoryId) => {
         `
         emptyContainer.appendChild(div)
     }
-    else{
+    else {
         data.data.forEach((element) => {
-            // console.log(element.authors[0].profile_name)
+            console.log(element.others.posted_date)
+
+            const seconds = `${element.others.posted_date}`
+            const minutes = Math.floor(seconds / 60)
+            const hours = Math.floor(minutes / 60)
+            const remainingMinutes = minutes % 60
+            console.log(remainingMinutes)
+            console.log(`${hours} hours ${remainingMinutes}minutes`)
+            
+
             const div = document.createElement('div')
             div.innerHTML = `
                     <div class="card rounded-lg bg-base-100 ">
                         <figure class="relative">
                             <img class="rounded-lg w-72 h-44 z-0" src="${element.thumbnail}" alt="" />
-                            <p class="bg-zinc-900 text-white rounded absolute right-6 bottom-3 z-10 px-2">${element.others.posted_date}</p>
+                            <p id="date" class="bg-zinc-900 text-white rounded absolute right-6 bottom-3 z-10 px-2">
+                            ${hours} hrs ${remainingMinutes} min ago
+                            </p>
                         </figure>
                         <div class="my-5 mx-2">
                             <div class="flex gap-2">
@@ -61,7 +72,7 @@ const handleCard = async (categoryId) => {
                                 <div>
                                     <h2 class="card-title font-bold">${element.title}</h2>
                                     <p class="font-medium text-slate-600">${element.authors[0].profile_name} 
-                                        <span>${element.authors[0].verified? "<img class='inline' src='./icons/verified-icon.svg'>" :""}</span>
+                                        <span>${element.authors[0].verified ? "<img class='inline' src='./icons/verified-icon.svg'>" : ""}</span>
                                     </p>
                                     
                                     <p class="font-medium text-slate-600">${element.others.views} views</p>
@@ -73,13 +84,13 @@ const handleCard = async (categoryId) => {
             cardContainer.appendChild(div)
         })
     }
-    
+
 }
 
 handleCategory()
 handleCard(1000)
 
-const blogButton =()=>{
+const blogButton = () => {
     window.location.href = "blog.html"
 }
 
